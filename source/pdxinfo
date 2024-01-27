@@ -1,0 +1,7 @@
+name=Human Press
+author=Eugene Bikkinin
+description=Human Press Playdate game
+bundleID=com.xneg.HumanPress
+version=1.0
+imagePath=SystemAssets/
+buildNumber=41
