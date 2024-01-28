@@ -4,4 +4,4 @@ description=Human Press Playdate game
 bundleID=com.xneg.HumanPress
 version=1.0
 imagePath=SystemAssets/
-buildNumber=120
+buildNumber=126

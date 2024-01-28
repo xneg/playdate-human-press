@@ -1,10 +1,10 @@
 local pd <const> = playdate
 local gfx <const> = pd.graphics
 
-local FALL_TIME_INIT = 6
+local FALL_TIME_INIT = 5
 local UPPER_POINT = 0
 local LOWER_POINT = 150
-local ASCEND_SPEED = 4
+local ASCEND_SPEED = 3
 
 class('PressController').extends()
 

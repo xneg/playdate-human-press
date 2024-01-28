@@ -22,6 +22,8 @@ function Press:init(x, behind)
     gfx.popContext()
     self:setImage(pressImage)
     self:add()
+
+    self:setCollideRect(0, 0, self:getSize())
     
     self.x = x
     self.y = 40
@@ -35,4 +37,14 @@ end
 
 function Press:fall(delta)
     self:moveBy(0, delta)
+    local actualX, actualY, collisions, length = self:checkCollisions(self.x, self.y + delta)
+    -- local actualX, actualY, collisions, length = self:moveWithCollisions(self.x, self.y + delta)
+    if length > 0 then
+        for _, collision in pairs(collisions) do
+            local collidedObject = collision['other']
+            if collidedObject:isa(Human) and collision['normal'].dy == -1 then
+                collidedObject:remove()
+            end
+        end
+    end
 end

@@ -5,6 +5,8 @@ import "CoreLibs/timer"
 
 import "press"
 import "press_controller"
+import "human"
+import "human_conveyer"
 
 local pd <const> = playdate
 local gfx <const> = pd.graphics
@@ -15,8 +17,10 @@ pressController:addPress(100)
 pressController:addPress(200, true)
 pressController:addPress(300)
 
+HumanConveyer()
+
 function pd.update()
     gfx.sprite.update()
-    -- pd.timer.updateTimers()
+    pd.timer.updateTimers()
     pressController:update()
 end
