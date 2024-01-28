@@ -3,9 +3,7 @@ import "CoreLibs/graphics"
 import "CoreLibs/sprites"
 import "CoreLibs/timer"
 
-import "press"
 import "press_controller"
-import "human"
 import "human_conveyer"
 
 local pd <const> = playdate

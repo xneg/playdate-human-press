@@ -1,10 +1,12 @@
 local pd <const> = playdate
 local gfx <const> = pd.graphics
 
-local FALL_TIME_INIT = 5
-local UPPER_POINT = 0
-local LOWER_POINT = 150
-local ASCEND_SPEED = 3
+local FALL_TIME_INIT <const> = 5
+local UPPER_POINT <const> = 0
+local LOWER_POINT <const> = 150
+local ASCEND_SPEED <const> = 3
+
+import "press"
 
 class('PressController').extends()
 

@@ -1,6 +1,8 @@
 local pd <const> = playdate
 local gfx <const> = pd.graphics
 
+import "press_tail"
+
 class('Press').extends(gfx.sprite)
 
 function Press:init(x, behind)
@@ -28,11 +30,13 @@ function Press:init(x, behind)
     self.x = x
     self.y = 40
     self:moveTo(self.x, self.y)
+    self.tail = PressTail(self.x, self.y - 120, self.behind)
 end
 
 function Press:move(delta)
     local direction = self.behind and -1 or 1
     self:moveBy(direction * delta, 0)
+    self.tail:move(self.x, self.y - 120)
 end
 
 function Press:fall(delta)
@@ -47,4 +51,5 @@ function Press:fall(delta)
             end
         end
     end
+    self.tail:move(self.x, self.y - 120)
 end

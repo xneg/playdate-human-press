@@ -1,6 +1,8 @@
 local pd <const> = playdate
 local gfx <const> = pd.graphics
 
+import "human"
+
 class('HumanConveyer').extends()
 
 function HumanConveyer:init()

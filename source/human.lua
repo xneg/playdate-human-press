@@ -1,9 +1,11 @@
 local pd <const> = playdate
 local gfx <const> = pd.graphics
 
+import "utils"
+
 class('Human').extends(gfx.sprite)
 
-local SPEED = 4
+local SPEED <const> = 4
 
 function Human:init()
     self.width = 20
@@ -11,6 +13,10 @@ function Human:init()
 
     gfx.pushContext(humanImage)
         gfx.setColor(gfx.kColorBlack)
+        local ditherType = getRandomDitherType()
+        if ditherType ~= nil then
+            gfx.setDitherPattern(0.5, ditherType)
+        end
         gfx.fillRect(0, 0, 20, 40)
     gfx.popContext()
     self:setImage(humanImage)
