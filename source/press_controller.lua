@@ -7,7 +7,6 @@ class('PressController').extends()
 
 function PressController:init()
     self.presses = {}
-    self.y = 0
 end
 
 function PressController:addPress(x, behind)
@@ -18,13 +17,6 @@ end
 function PressController:movePresses(delta)
     for _, press in ipairs(self.presses) do
         press:move(delta)
-    end
-end
-
-function PressController:fallPresses(delta)
-    self.y += delta
-    for _, press in ipairs(self.presses) do
-        press:fall(delta)
     end
 end
 

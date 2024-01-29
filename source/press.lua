@@ -32,6 +32,8 @@ function Press:init(x, behind)
     self.falling = false
     self.ascending = false
     self.fall_time = FALL_TIME_INIT
+    self.clangSound = pd.sound.fileplayer.new("sounds/clang")
+    self.boneBreakSound = pd.sound.fileplayer.new("sounds/fart")
 
     self:setImage(getPressImage(self.behind))
     self:add()
@@ -93,10 +95,15 @@ function Press:fall(delta)
             if collidedObject:isa(Human) and collision['normal'].dy == -1 then
                 collidedObject:remove()
                 shoudAscend = true
+                self.boneBreakSound:play()
             end
         end
     end
-    if actualY >= LOWER_POINT or shoudAscend then
+    if actualY >= LOWER_POINT then
+        shoudAscend = true
+        self.clangSound:play()
+    end
+    if shoudAscend then
         self.falling = false
         self.ascending = true
         self.fall_time = FALL_TIME_INIT
