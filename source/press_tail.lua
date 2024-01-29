@@ -15,7 +15,7 @@ function PressTail:init(x, y, behind)
     gfx.pushContext(pressImage)
         gfx.setColor(gfx.kColorBlack)
         if behind == true then
-            gfx.setDitherPattern(0.5, gfx.image.kDitherTypeHorizontalLine)
+            gfx.setDitherPattern(0.5, gfx.image.kDitherTypeDiagonalLine)
         end
         gfx.fillRect(10, 0, 20, 160, ditherMask)
     gfx.popContext()
