@@ -31,7 +31,7 @@ end
 
 function Human:update()
     local actualX, actualY, collisions, length = self:moveWithCollisions(self.x + SPEED, self.y)
-    -- self:moveBy(4, 0)
+    -- self:moveBy(SPEED, 0)
     if self.x > 400 then
         self:remove()
     end

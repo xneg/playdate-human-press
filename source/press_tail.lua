@@ -22,7 +22,6 @@ function PressTail:init(x, y, behind)
     self:setImage(pressImage)
     self:add()
 
-    self:setCollideRect(0, 0, self:getSize())
     self:moveTo(x, y)
 end
 

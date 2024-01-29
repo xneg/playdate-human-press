@@ -1,20 +1,12 @@
 local pd <const> = playdate
 local gfx <const> = pd.graphics
 
-local FALL_TIME_INIT <const> = 5
-local UPPER_POINT <const> = 0
-local LOWER_POINT <const> = 150
-local ASCEND_SPEED <const> = 3
-
 import "press"
 
 class('PressController').extends()
 
 function PressController:init()
     self.presses = {}
-    self.falling = false
-    self.ascending = false
-    self.fall_time = FALL_TIME_INIT
     self.y = 0
 end
 
@@ -50,33 +42,9 @@ function PressController:leftAndRight()
 end
 
 function PressController:update()
-    if pd.buttonJustPressed(pd.kButtonB) and self.falling == false and self.ascending == false then
-        self.falling = true
-    end
-
-    if self.falling == true then
-        local delta = self.fall_time * self.fall_time
-        self.fall_time += 1
-        if self.y + delta > LOWER_POINT then
-            delta = LOWER_POINT - self.y
-        end
-        self:fallPresses(delta)
-        if self.y == LOWER_POINT then
-            self.falling = false
-            self.ascending = true
-            self.fall_time = FALL_TIME_INIT
-        end
-        coroutine.yield()
-    end
-
-    if self.ascending == true then
-        local delta = -ASCEND_SPEED
-        if self.y + delta < UPPER_POINT then
-            delta = -self.y
-        end
-        self:fallPresses(delta)
-        if self.y == UPPER_POINT then
-            self.ascending = false
+    if pd.buttonJustPressed(pd.kButtonB) then
+        for _, press in ipairs(self.presses) do
+            press:startFall()
         end
     end
 
