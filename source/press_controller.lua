@@ -43,8 +43,8 @@ function PressController:update()
     local change, acceleratedChange = pd.getCrankChange()
     local left, right = self:leftAndRight()
     if acceleratedChange < 0 and left > 0 then
-        self:movePresses(acceleratedChange/ 10)
+        self:movePresses(acceleratedChange)
     elseif acceleratedChange > 0 and right < 400 then
-        self:movePresses(acceleratedChange/ 10)
+        self:movePresses(acceleratedChange)
     end
 end

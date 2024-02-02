@@ -5,9 +5,19 @@ import "CoreLibs/timer"
 
 import "press_controller"
 import "human_conveyer"
+import "screen_shake"
+import "score_display"
 
 local pd <const> = playdate
 local gfx <const> = pd.graphics
+
+local screenShakeSprite = ScreenShake()
+
+function setShakeAmount(amount)
+    screenShakeSprite:setShakeAmount(amount)
+end
+
+createScoreDisplay()
 
 pressController = PressController()
 
