@@ -101,7 +101,6 @@ function Press:fall(delta)
             local collidedObject = collision['other']
             if collidedObject:isa(Human) and collision['normal'].dy == -1 then
                 collidedObject:hit()
-                incrementScore()
                 self.press_state = PressState.Ascending
                 -- self.pullingChaingSound:play()
                 setShakeAmount(2)

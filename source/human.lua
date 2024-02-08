@@ -40,6 +40,7 @@ function Human:update()
         -- if getRandomEvent(3) then
         --     getRandomEscapeCry():play()
         -- end
+        decrementScore()
         self:remove()
     end
 end
@@ -48,6 +49,7 @@ function Human:hit()
     -- if getRandomEvent(10) then
     --     self.noSound:play()
     -- end
+    incrementScore()
     self.boneBreakSound:play()
     self:remove()
 end
@@ -61,9 +63,4 @@ local escapeCries <const> = {
 function getRandomEscapeCry()
     local randomIndex = math.random(#escapeCries)
     return escapeCries[randomIndex]
-end
-
-function getRandomEvent(probability)
-    local result = math.random(probability)
-    return result == 1
 end

@@ -2,6 +2,8 @@ local pd <const> = playdate
 local gfx <const> = pd.graphics
 
 import "human"
+import "human_with_helmet"
+import "utils"
 
 class('HumanConveyer').extends()
 
@@ -19,5 +21,9 @@ function HumanConveyer:createTimer()
 end
 
 function HumanConveyer:addHuman()
-    Human()
+    if getRandomEvent(5) then
+        HumanWithHelmet()
+    else
+        Human()
+    end
 end

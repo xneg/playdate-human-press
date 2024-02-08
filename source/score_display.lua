@@ -28,6 +28,11 @@ function incrementScore()
     updateDisplay()
 end
 
+function decrementScore()
+    score -= 10
+    updateDisplay()
+end
+
 function resetScore()
     score = 0
     updateDisplay()

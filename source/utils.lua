@@ -21,3 +21,8 @@ function getRandomDitherType()
     local randomIndex = math.random(#ditherTypes)
     return ditherTypes[randomIndex]
 end
+
+function getRandomEvent(probability)
+    local result = math.random(probability)
+    return result == 1
+end
