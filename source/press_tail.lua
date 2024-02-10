@@ -3,9 +3,9 @@ local gfx <const> = pd.graphics
 
 class('PressTail').extends(gfx.sprite)
 
-function PressTail:init(x, y, behind)
-    behind = behind or false
-    self.behind = behind
+function PressTail:init(press, opposite)
+    self.opposite = opposite or false
+    self.press = press
     self.width = 40
     local pressImage = gfx.image.new(self.width, 160)
     
@@ -14,7 +14,7 @@ function PressTail:init(x, y, behind)
 
     gfx.pushContext(pressImage)
         gfx.setColor(gfx.kColorBlack)
-        if behind == true then
+        if opposite == true then
             gfx.setDitherPattern(0.5, gfx.image.kDitherTypeDiagonalLine)
         end
         gfx.fillRect(10, 0, 20, 160, ditherMask)
@@ -22,9 +22,13 @@ function PressTail:init(x, y, behind)
     self:setImage(pressImage)
     self:add()
 
-    self:moveTo(x, y)
+    self:moveTo(self.press.x, self.press.y - 120)
 end
 
-function PressTail:move(x, y)
-    self:moveTo(x, y)
+function PressTail:update()
+    self:moveTo(self.press.x, self.press.y - 120)
 end
+
+-- function PressTail:move(x, y)
+--     self:moveTo(x, y)
+-- end

@@ -26,3 +26,6 @@ function getRandomEvent(probability)
     local result = math.random(probability)
     return result == 1
 end
+
+SCREEN_WIDTH = 400
+SCREEN_HEIGH = 280

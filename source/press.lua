@@ -1,4 +1,5 @@
 import "press_tail"
+import "utils"
 
 local pd <const> = playdate
 local gfx <const> = pd.graphics
@@ -21,21 +22,18 @@ local PressState = {
 
 class('Press').extends(gfx.sprite)
 
-function Press:init(x, behind)
-    behind = behind or false
-    self.behind = behind
-
+function Press:init(x, opposite)
+    self.opposite = opposite or false
     self.press_state = PressState.UnderCeiling
-
     self.fall_time = FALL_TIME_INIT
     self.rest_time = 0
 
     self.clangSound = pd.sound.sampleplayer.new("sounds/clang")
     self.clickSound = pd.sound.sampleplayer.new("sounds/click")
     self.pullingChaingSound = pd.sound.sampleplayer.new("sounds/pulling-chain")
-    self:setImage(getPressImage(self.behind))
-    self:add()
 
+    self:setImage(getPressImage(self.opposite))
+    self:add()
     self:setCollideRect(0, 0, self:getSize())
     self.collisionResponse = function(other)
         return gfx.sprite.kCollisionTypeOverlap
@@ -44,7 +42,7 @@ function Press:init(x, behind)
     self.x = x
     self.y = 40
     self:moveTo(self.x, self.y)
-    self.tail = PressTail(self.x, self.y - 120, self.behind)
+    self.tail = PressTail(self, self.opposite)
 end
 
 function Press:startFall()
@@ -54,19 +52,15 @@ function Press:startFall()
 end
 
 function Press:move(delta)
-    -- if self.press_state == PressState.UnderCeiling or self.press_state == PressState.Ascending then
-        local direction = self.behind and -1 or 1
-        self:moveBy(direction * delta, 0)
+    local direction = self.opposite and -1 or 1
+    self:moveBy(direction * delta, 0)
 
-        if self.x < -self.width/2 then
-            self.x += 400 + self.width / 2
-        elseif self.x > 400 + self.width / 2 then
-            self.x += -400 - self.width
-        end
-        self:moveTo(self.x, self.y)
-
-        self.tail:move(self.x, self.y - 120)
-    -- end
+    if self.x < -self.width/2 then
+        self.x += SCREEN_WIDTH + self.width / 2
+    elseif self.x > SCREEN_WIDTH + self.width / 2 then
+        self.x += -SCREEN_WIDTH - self.width
+    end
+    self:moveTo(self.x, self.y)
 end
 
 function Press:update()
@@ -131,7 +125,6 @@ function Press:fall(delta)
     if self.press_state ~= PressState.Falling then
         self.fall_time = FALL_TIME_INIT
     end
-    self.tail:move(self.x, self.y - 120)
 end
 
 function getPressImage(behind)
