@@ -3,7 +3,7 @@ import "CoreLibs/graphics"
 import "CoreLibs/sprites"
 import "CoreLibs/timer"
 
-import "press_controller"
+import "press"
 import "human_conveyer"
 import "screen_shake"
 import "score_display"
@@ -19,17 +19,14 @@ end
 
 createScoreDisplay()
 
-pressController = PressController()
-
 -- (400 + press.width) / 3
-pressController:addPress(0)
-pressController:addPress(147)
-pressController:addPress(293)
+Press(0)
+Press(147)
+Press(293)
 
 HumanConveyer()
 
 function pd.update()
     gfx.sprite.update()
     pd.timer.updateTimers()
-    pressController:update()
 end
