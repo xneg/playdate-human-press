@@ -14,12 +14,6 @@ function PressController:addPress(x, behind)
 end
 
 
-function PressController:movePresses(delta)
-    for _, press in ipairs(self.presses) do
-        press:move(delta)
-    end
-end
-
 function PressController:leftAndRight()
     local left, right = 400, 0
     for _, press in ipairs(self.presses) do
@@ -34,17 +28,12 @@ function PressController:leftAndRight()
 end
 
 function PressController:update()
-    if pd.buttonJustPressed(pd.kButtonB) then
-        for _, press in ipairs(self.presses) do
-            press:startFall()
-        end
-    end
-
-    local change, acceleratedChange = pd.getCrankChange()
-    local left, right = self:leftAndRight()
-    if acceleratedChange < 0 and left > 0 then
-        self:movePresses(acceleratedChange)
-    elseif acceleratedChange > 0 and right < 400 then
-        self:movePresses(acceleratedChange)
-    end
+    -- local xs = {}
+    -- for _, press in ipairs(self.presses) do
+    --     table.insert(xs, press.x)
+    -- end
+    -- table.sort(xs, function(a, b) return a > b end)
+    -- if xs then
+    --     print(xs[1] - xs[2], xs[2] - xs[3])
+    -- end
 end

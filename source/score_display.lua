@@ -29,7 +29,7 @@ function incrementScore()
 end
 
 function decrementScore()
-    score -= 10
+    score -= 1
     updateDisplay()
 end
 

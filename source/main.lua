@@ -21,9 +21,10 @@ createScoreDisplay()
 
 pressController = PressController()
 
-pressController:addPress(100)
-pressController:addPress(200, true)
-pressController:addPress(300)
+-- (400 + press.width) / 3
+pressController:addPress(0)
+pressController:addPress(147)
+pressController:addPress(293)
 
 HumanConveyer()
 

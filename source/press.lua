@@ -43,7 +43,7 @@ function Press:init(x, behind)
     
     self.x = x
     self.y = 40
-    self:moveTo(x, self.y)
+    self:moveTo(self.x, self.y)
     self.tail = PressTail(self.x, self.y - 120, self.behind)
 end
 
@@ -54,14 +54,29 @@ function Press:startFall()
 end
 
 function Press:move(delta)
-    if self.press_state == PressState.UnderCeiling or self.press_state == PressState.Ascending then
+    -- if self.press_state == PressState.UnderCeiling or self.press_state == PressState.Ascending then
         local direction = self.behind and -1 or 1
         self:moveBy(direction * delta, 0)
+
+        if self.x < -self.width/2 then
+            self.x += 400 + self.width / 2
+        elseif self.x > 400 + self.width / 2 then
+            self.x += -400 - self.width
+        end
+        self:moveTo(self.x, self.y)
+
         self.tail:move(self.x, self.y - 120)
-    end
+    -- end
 end
 
 function Press:update()
+    if pd.buttonJustPressed(pd.kButtonB) and self.press_state == PressState.UnderCeiling then
+        self.press_state = PressState.Falling
+    end
+
+    local change, acceleratedChange = pd.getCrankChange()
+    self:move(acceleratedChange)
+
     if self.press_state == PressState.Falling then
         local delta = self.fall_time * self.fall_time
         self.fall_time += 1
